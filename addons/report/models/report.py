@@ -445,7 +445,8 @@ class Report(osv.Model):
                 content_file.write(reporthtml[1])
 
             try:
-                wkhtmltopdf = [_get_wkhtmltopdf_bin()] + command_args + local_command_args
+                wkhtmltopdf = [_get_wkhtmltopdf_bin()] + ['--javascript-delay', '5000'] + command_args + local_command_args
+                # wkhtmltopdf = [_get_wkhtmltopdf_bin()] + command_args + local_command_args
                 wkhtmltopdf += [content_file_path] + [pdfreport_path]
 
                 process = subprocess.Popen(wkhtmltopdf, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
